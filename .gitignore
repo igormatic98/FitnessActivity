@@ -2,6 +2,11 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
+# Ignore bin and obj folders and everything inside them
+bin/
+obj/
+
+# Ignore .vs files and other Visual Studio generated files
 *.vsidx
 /.vs/FitnessActivity/v17/.suo
 /.vs/FitnessActivity/v17/DocumentLayout.json
