@@ -4,10 +4,7 @@ namespace FitnessActivity.Auth.Entities;
 
 public class Role : IdentityRole<Guid>
 {
-    public const string AGENT = "Agent";
-    public const string CUSTOMER = "Customer";
-    public const string DIRECTOR = "Director";
-    public const string SELLER = "Seller";
+    public const string FITNES_ACTIVIST = "FitnessActivist";
 
     public Role()
         : base() { }
