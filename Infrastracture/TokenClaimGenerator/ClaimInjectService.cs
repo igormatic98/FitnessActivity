@@ -28,7 +28,7 @@ public class ClaimInjectService : IClaimInjectService
         var roles = await userManager.GetRolesAsync(user);
 
         //Ukoliko je korisnik u roli prodavca, u svom tokenu ima informaciju o aktivnoj kampanji
-        if (roles.Any(r => r == Role.FITNES_ACTIVIST)) { }
+        if (roles.Any(r => r == Role.FITNESS_ACTIVIST)) { }
         return claims;
     }
 }

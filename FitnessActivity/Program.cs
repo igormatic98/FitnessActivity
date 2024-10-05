@@ -1,4 +1,5 @@
 using Infrastracture;
+using Infrastracture.Seed;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -41,6 +42,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+//Dodavanje Seeda, ukoliko je Development okruzenje
+if (app.Environment.IsDevelopment())
+{
+    await Seed.SeedAsync(app, builder.Configuration, builder.Environment);
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
