@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastracture.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20241005201834_AddFitnesActivityShemaMigration")]
+    [Migration("20241005203305_AddFitnesActivityShemaMigration")]
     partial class AddFitnesActivityShemaMigration
     {
         /// <inheritdoc />
@@ -42,7 +42,7 @@ namespace Infrastracture.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ActivityTypes", "Catalog");
+                    b.ToTable("ActivityType", "Catalog");
                 });
 
             modelBuilder.Entity("Domain.FitnessActivity.Entities.FitnessActivist", b =>
@@ -72,7 +72,7 @@ namespace Infrastracture.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("FitnessActivists", "FitnessActivity");
+                    b.ToTable("FitnessActivist", "FitnessActivity");
                 });
 
             modelBuilder.Entity("Domain.FitnessActivity.Entities.FitnessActivity", b =>
@@ -107,7 +107,7 @@ namespace Infrastracture.Migrations
 
                     b.HasIndex("ActivityTypeId");
 
-                    b.ToTable("FitnessActivities", "FitnessActivity");
+                    b.ToTable("FitnessActivity", "FitnessActivity");
                 });
 
             modelBuilder.Entity("Domain.FitnessActivity.Entities.Goal", b =>
@@ -137,7 +137,7 @@ namespace Infrastracture.Migrations
 
                     b.HasIndex("ActivistId");
 
-                    b.ToTable("Goals", "FitnessActivity");
+                    b.ToTable("Goal", "FitnessActivity");
                 });
 
             modelBuilder.Entity("Domain.FitnessActivity.Entities.GoalActivity", b =>
@@ -158,7 +158,7 @@ namespace Infrastracture.Migrations
 
                     b.HasIndex("ActivityId");
 
-                    b.ToTable("GoalActivities", "FitnessActivity");
+                    b.ToTable("GoalActivity", "FitnessActivity");
                 });
 
             modelBuilder.Entity("FitnessActivity.Auth.Entities.RefreshToken", b =>

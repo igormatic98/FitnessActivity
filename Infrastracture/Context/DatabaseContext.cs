@@ -28,14 +28,14 @@ public class DatabaseContext
     #endregion
 
     #region Catalog
-    public DbSet<ActivityType> ActivityTypes { get; set; }
+    public DbSet<ActivityType> ActivityType { get; set; }
     #endregion
 
     #region
-    public DbSet<FitnessActivity> FitnessActivities { get; set; }
-    public DbSet<Goal> Goals { get; set; }
-    public DbSet<FitnessActivist> FitnessActivists { get; set; }
-    public DbSet<GoalActivity> GoalActivities { get; set; }
+    public DbSet<FitnessActivity> FitnessActivity { get; set; }
+    public DbSet<Goal> Goal { get; set; }
+    public DbSet<FitnessActivist> FitnessActivist { get; set; }
+    public DbSet<GoalActivity> GoalActivity { get; set; }
 
     #endregion
 

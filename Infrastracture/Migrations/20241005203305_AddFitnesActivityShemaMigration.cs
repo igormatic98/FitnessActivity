@@ -18,7 +18,7 @@ namespace Infrastracture.Migrations
                 name: "FitnessActivity");
 
             migrationBuilder.CreateTable(
-                name: "ActivityTypes",
+                name: "ActivityType",
                 schema: "Catalog",
                 columns: table => new
                 {
@@ -29,11 +29,11 @@ namespace Infrastracture.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ActivityTypes", x => x.Id);
+                    table.PrimaryKey("PK_ActivityType", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "FitnessActivists",
+                name: "FitnessActivist",
                 schema: "FitnessActivity",
                 columns: table => new
                 {
@@ -47,9 +47,9 @@ namespace Infrastracture.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FitnessActivists", x => x.Id);
+                    table.PrimaryKey("PK_FitnessActivist", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_FitnessActivists_User_UserId",
+                        name: "FK_FitnessActivist_User_UserId",
                         column: x => x.UserId,
                         principalSchema: "Auth",
                         principalTable: "User",
@@ -58,7 +58,7 @@ namespace Infrastracture.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "FitnessActivities",
+                name: "FitnessActivity",
                 schema: "FitnessActivity",
                 columns: table => new
                 {
@@ -73,18 +73,18 @@ namespace Infrastracture.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FitnessActivities", x => x.Id);
+                    table.PrimaryKey("PK_FitnessActivity", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_FitnessActivities_ActivityTypes_ActivityTypeId",
+                        name: "FK_FitnessActivity_ActivityType_ActivityTypeId",
                         column: x => x.ActivityTypeId,
                         principalSchema: "Catalog",
-                        principalTable: "ActivityTypes",
+                        principalTable: "ActivityType",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Goals",
+                name: "Goal",
                 schema: "FitnessActivity",
                 columns: table => new
                 {
@@ -98,18 +98,18 @@ namespace Infrastracture.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Goals", x => x.Id);
+                    table.PrimaryKey("PK_Goal", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Goals_FitnessActivists_ActivistId",
+                        name: "FK_Goal_FitnessActivist_ActivistId",
                         column: x => x.ActivistId,
                         principalSchema: "FitnessActivity",
-                        principalTable: "FitnessActivists",
+                        principalTable: "FitnessActivist",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "GoalActivities",
+                name: "GoalActivity",
                 schema: "FitnessActivity",
                 columns: table => new
                 {
@@ -120,69 +120,69 @@ namespace Infrastracture.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GoalActivities", x => new { x.GoalId, x.ActivityId });
+                    table.PrimaryKey("PK_GoalActivity", x => new { x.GoalId, x.ActivityId });
                     table.ForeignKey(
-                        name: "FK_GoalActivities_FitnessActivities_ActivityId",
+                        name: "FK_GoalActivity_FitnessActivity_ActivityId",
                         column: x => x.ActivityId,
                         principalSchema: "FitnessActivity",
-                        principalTable: "FitnessActivities",
+                        principalTable: "FitnessActivity",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_GoalActivities_Goals_GoalId",
+                        name: "FK_GoalActivity_Goal_GoalId",
                         column: x => x.GoalId,
                         principalSchema: "FitnessActivity",
-                        principalTable: "Goals",
+                        principalTable: "Goal",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_FitnessActivists_UserId",
+                name: "IX_FitnessActivist_UserId",
                 schema: "FitnessActivity",
-                table: "FitnessActivists",
+                table: "FitnessActivist",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FitnessActivities_ActivityTypeId",
+                name: "IX_FitnessActivity_ActivityTypeId",
                 schema: "FitnessActivity",
-                table: "FitnessActivities",
+                table: "FitnessActivity",
                 column: "ActivityTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_GoalActivities_ActivityId",
+                name: "IX_Goal_ActivistId",
                 schema: "FitnessActivity",
-                table: "GoalActivities",
-                column: "ActivityId");
+                table: "Goal",
+                column: "ActivistId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Goals_ActivistId",
+                name: "IX_GoalActivity_ActivityId",
                 schema: "FitnessActivity",
-                table: "Goals",
-                column: "ActivistId");
+                table: "GoalActivity",
+                column: "ActivityId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "GoalActivities",
+                name: "GoalActivity",
                 schema: "FitnessActivity");
 
             migrationBuilder.DropTable(
-                name: "FitnessActivities",
+                name: "FitnessActivity",
                 schema: "FitnessActivity");
 
             migrationBuilder.DropTable(
-                name: "Goals",
+                name: "Goal",
                 schema: "FitnessActivity");
 
             migrationBuilder.DropTable(
-                name: "ActivityTypes",
+                name: "ActivityType",
                 schema: "Catalog");
 
             migrationBuilder.DropTable(
-                name: "FitnessActivists",
+                name: "FitnessActivist",
                 schema: "FitnessActivity");
         }
     }
