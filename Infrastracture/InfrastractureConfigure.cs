@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
+using Infrastracture.Services.FitnessActivityService;
 
 namespace Infrastracture;
 
@@ -53,6 +54,11 @@ public class InfrastractureConfigure
             .AddEntityFrameworkStores<DatabaseContext>()
             .AddDefaultTokenProviders();
 
+        #endregion
+
+
+        #region Services
+        services.AddScoped<FitnessActivityService>();
         #endregion
     }
 }

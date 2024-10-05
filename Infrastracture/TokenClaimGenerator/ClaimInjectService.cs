@@ -1,7 +1,9 @@
-﻿using FitnessActivity.Auth.Entities;
+﻿using Auth.Services;
+using FitnessActivity.Auth.Entities;
 using FitnessActivity.Auth.TokenClaimGenerator;
 using FitnessActivity.Infrastructure;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace Infrastracture.TokenClaimGenerator;
@@ -28,7 +30,21 @@ public class ClaimInjectService : IClaimInjectService
         var roles = await userManager.GetRolesAsync(user);
 
         //Ukoliko je korisnik u roli prodavca, u svom tokenu ima informaciju o aktivnoj kampanji
-        if (roles.Any(r => r == Role.FITNESS_ACTIVIST)) { }
+        if (roles.Any(r => r == Role.FITNESS_ACTIVIST))
+        {
+            var fitnessActivistId = await databaseContext.FitnessActivist
+                .Where(fa => fa.UserId == user.Id)
+                .Select(fa => fa.Id)
+                .FirstOrDefaultAsync();
+
+            claims.Add(
+                new Claim(
+                    CustomClaimTypes.FitnessActivistId,
+                    fitnessActivistId.ToString()!,
+                    ClaimValueTypes.Integer32
+                )
+            );
+        }
         return claims;
     }
 }

@@ -1,42 +1,56 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.IdentityModel.Tokens.Jwt;
 
-namespace Auth.Services
+namespace Auth.Services;
+
+public static class CustomClaimTypes
 {
-    public static class CustomClaimTypes
+    //id sportiste koji se nalazi u tokenu
+    public const string FitnessActivistId = "fitnessActivistId";
+}
+
+public class TokenReaderService
+{
+    private readonly IHttpContextAccessor httpContextAccessor;
+
+    public TokenReaderService(IHttpContextAccessor httpContextAccessor)
     {
-        //id sportiste koji se nalazi u tokenu
+        this.httpContextAccessor = httpContextAccessor;
     }
 
-    public class TokenReaderService
+    private string GetClaimValue(string claimType)
     {
-        private readonly IHttpContextAccessor httpContextAccessor;
+        var token = httpContextAccessor.HttpContext
+            ?.Request.Headers["Authorization"].ToString()
+            ?.Replace("Bearer ", "");
 
-        public TokenReaderService(IHttpContextAccessor httpContextAccessor)
+        if (string.IsNullOrEmpty(token))
         {
-            this.httpContextAccessor = httpContextAccessor;
+            throw new ArgumentException("No token provided");
         }
 
-        private string GetClaimValue(string claimType)
+        var handler = new JwtSecurityTokenHandler();
+
+        if (handler.CanReadToken(token))
         {
-            var token = httpContextAccessor.HttpContext
-                ?.Request.Headers["Authorization"].ToString()
-                ?.Replace("Bearer ", "");
-
-            if (string.IsNullOrEmpty(token))
-            {
-                throw new ArgumentException("No token provided");
-            }
-
-            var handler = new JwtSecurityTokenHandler();
-
-            if (handler.CanReadToken(token))
-            {
-                var jwtToken = handler.ReadJwtToken(token);
-                var claim = jwtToken.Claims.FirstOrDefault(c => c.Type == claimType);
-                return claim?.Value;
-            }
-            return "";
+            var jwtToken = handler.ReadJwtToken(token);
+            var claim = jwtToken.Claims.FirstOrDefault(c => c.Type == claimType);
+            return claim?.Value;
         }
+        return "";
+    }
+
+    public int GetFitnessActivistId()
+    {
+        if (
+            int.TryParse(
+                GetClaimValue(CustomClaimTypes.FitnessActivistId),
+                out int fitnessActivistId
+            )
+        )
+        {
+            return fitnessActivistId;
+        }
+        return default;
     }
 }
