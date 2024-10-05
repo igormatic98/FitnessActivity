@@ -13,7 +13,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace CustomerRewards.Auth.Services;
+namespace FitnessActivity.Auth.Services;
 
 public class AuthenticationService : IAuthenticationService
 {

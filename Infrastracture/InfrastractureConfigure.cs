@@ -1,5 +1,5 @@
 ﻿using Auth.Services;
-using CustomerRewards.Auth.Services;
+using FitnessActivity.Auth.Services;
 using FitnessActivity.Auth.Entities;
 using FitnessActivity.Auth.Services;
 using FitnessActivity.Auth.TokenClaimGenerator;
