@@ -10,4 +10,6 @@ obj/
 *.vsidx
 /.vs/FitnessActivity/v17/.suo
 /.vs/FitnessActivity/v17/DocumentLayout.json
-*.config
+*.v2
+/.vs/ProjectEvaluation
+/.vs/FitnessActivity/config/applicationhost.config
